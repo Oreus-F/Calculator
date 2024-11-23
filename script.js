@@ -2,6 +2,7 @@ let number1;
 let number2;
 let operator;
 let displayedNumber = [2, 1];
+let str = displayedNumber.join("")
 
 const digitBox = document.querySelector("#digitBox");
 const resultDisplay = document.querySelector("#resultDisplay");
@@ -27,7 +28,7 @@ const operate = function(action, firstNumber, secondNumber){
     return action(firstNumber, secondNumber);
 };
 
-resultDisplay.textContent = displayedNumber.join(",");
+resultDisplay.textContent = str;
 
 digitBox.addEventListener("click", (e) => {
     let target = e.target;
@@ -36,12 +37,12 @@ digitBox.addEventListener("click", (e) => {
     switch(target.id){
         
 
-        case"clear":
+        case "clear":
             
             break;
 
 
-        case"del":
+        case "del":
             break;
                     
 
