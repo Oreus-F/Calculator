@@ -1,13 +1,18 @@
 --  TODO --
 
+    HTML SPINE
+    BASIC FLEXBOX CSS
+    CREATE SWITCH CASE FOR BUTTON
+        Create a variable wich will be on the resultDisplay DIV
+        Did that variable should be string or number directly ? 
+
+-- DONE --
+
     FUNCtIONS :
         ADD
         SUBSTRACT
         MULTIPLY
         DIVIDE
-
--- DONE --
-
 
 
 
