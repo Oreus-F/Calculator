@@ -1,0 +1,28 @@
+#digitBox{
+    display: flex;
+    border: 1px black solid;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+    flex: 1;
+    border: 1px black solid;
+    justify-content: space-around;
+}
+
+.flexPanel{
+    border: 1px black solid;
+    flex: 1;
+}
+
+.empty{
+    color: white;
+    background-color: white;
+}
+
+#resultDisplay{
+    height: 30px;
+    border: 1px black solid;
+    text-align: end;
+}
