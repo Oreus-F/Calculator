@@ -1,5 +1,10 @@
 --  TODO --
 
+    FUNCtIONS :
+        ADD
+        SUBSTRACT
+        MULTIPLY
+        DIVIDE
 
 -- DONE --
 
