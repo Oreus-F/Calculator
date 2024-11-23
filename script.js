@@ -1,3 +1,6 @@
+let number1;
+let number2;
+let operator;
 
 
 const add = function(a, b){
