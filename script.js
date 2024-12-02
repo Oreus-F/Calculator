@@ -1,7 +1,8 @@
-let number1;
-let number2;
-let operator;
 let displayedNumber = "";
+let firstNumber;
+let secondNumber;
+let action;
+let result;
 
 
 const digitBox = document.querySelector("#digitBox");
@@ -28,10 +29,6 @@ const operate = function(action, firstNumber, secondNumber){
     return action(firstNumber, secondNumber);
 };
 
-const changeNumbersDisplayed = function(){
-    let str = displayedNumber.join("");
-    resultDisplay.textContent = str;
-};
 
 const deleteLastNumber = function(str){
     array = str.split('');
@@ -39,9 +36,14 @@ const deleteLastNumber = function(str){
     return array = array.join('');
 }
 
+const changeStrIntoNumber = function(str){
+    console.log(str)
+    if(str.length === 0){return 0};
+    return +str;
+};
+
 digitBox.addEventListener("click", (e) => {
     let target = e.target;
-
 
     switch(target.id){
         
@@ -53,8 +55,14 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "del":
+            /*
             displayedNumber = deleteLastNumber(displayedNumber);
             resultDisplay.textContent = displayedNumber;
+
+            Problem is, if the operation is done, 
+            the del case will get back into the previous number to work
+            so it will be the last thing to do after make sure all operations works
+            */
             break;
                     
 
@@ -126,6 +134,31 @@ digitBox.addEventListener("click", (e) => {
             displayedNumber += ".";
             resultDisplay.textContent = displayedNumber;
             break;
+
+
+        case "division":
+            firstNumber = changeStrIntoNumber(displayedNumber);
+            action = divide;
+            break;
+
+        case "multiplication":
+
+            break;
+
+        case "substraction":
+
+            break;
+
+        case "addition":
+
+            break;
+
+        case "equal":
+            secondNumber = 2;
+            result = operate(action, firstNumber, secondNumber);
+            resultDisplay.textContent = result;
+            break;
+        
     }
 });
 
