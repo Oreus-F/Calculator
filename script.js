@@ -33,6 +33,12 @@ const changeNumbersDisplayed = function(){
     resultDisplay.textContent = str;
 };
 
+const deleteLastNumber = function(str){
+    array = str.split('');
+    array.pop();
+    return array = array.join('');
+}
+
 digitBox.addEventListener("click", (e) => {
     let target = e.target;
 
@@ -47,7 +53,8 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "del":
-
+            displayedNumber = deleteLastNumber(displayedNumber);
+            resultDisplay.textContent = displayedNumber;
             break;
                     
 
