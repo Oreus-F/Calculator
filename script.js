@@ -1,4 +1,4 @@
-let displayedNumber = "";
+let displayedNumber = [0];
 let firstNumber;
 let secondNumber;
 let action;
@@ -9,6 +9,14 @@ let chosenOperator;
 const digitBox = document.querySelector("#digitBox");
 const waitingOperation = document.querySelector("#waitingOperation");
 const resultDisplay = document.querySelector("#resultDisplay");
+
+const getVariable = function(){
+    console.log(`
+        displayedNumber : ${displayedNumber}
+        firstNumber : ${firstNumber}
+        secondNumber : ${secondNumber}
+        result : ${result}`);
+};
 
 
 const add = function(a, b){
@@ -39,10 +47,42 @@ const deleteLastNumber = function(str){
 }
 
 const changeStrIntoNumber = function(str){
-    console.log(str)
     if(str.length === 0){return 0};
     return +str;
 };
+
+const clearAll = function(){
+    displayedNumber = [0];
+    showSelectedNumber();
+    waitingOperation.textContent = "";
+};
+
+const getFirstNumber = function(){
+    firstNumber = changeStrIntoNumber(displayedNumber.join(''));
+};
+
+const getSecondNumber = function(){
+    let checkNumber = displayedNumber.join('');
+    console.log(checkNumber);
+    if(checkNumber === "0" && !(result === undefined)){
+        secondNumber = result;
+    } else {
+        secondNumber = changeStrIntoNumber(displayedNumber.join(''));
+    };
+};
+
+
+const showWaitingOperation = function(){
+    getFirstNumber();
+    waitingOperation.textContent = `${firstNumber} ${chosenOperator}`;
+    displayedNumber = [0];
+};
+
+const showSelectedNumber = function(){
+    resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
+}
+
+
 
 digitBox.addEventListener("click", (e) => {
     let target = e.target;
@@ -51,12 +91,13 @@ digitBox.addEventListener("click", (e) => {
         
 
         case "clear":
-            displayedNumber = "";
-            resultDisplay.textContent = displayedNumber;
+            clearAll();
+            
             break;
 
 
         case "del":
+
             /*
             displayedNumber = deleteLastNumber(displayedNumber);
             resultDisplay.textContent = displayedNumber;
@@ -65,105 +106,127 @@ digitBox.addEventListener("click", (e) => {
             the del case will get back into the previous number to work
             so it will be the last thing to do after make sure all operations works
             */
+            
             break;
                     
 
         case "1":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+            displayedNumber.push(1);
+            showSelectedNumber();
+            
             break;
 
     
-        case "2":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+        case "2": 
+            displayedNumber.push(2);
+            showSelectedNumber();
+            
             break;
 
     
-        case "3":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+        case "3": 
+            displayedNumber.push(3);
+            showSelectedNumber();
+            
             break;
         
     
         case "4":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+            displayedNumber.push(4);
+            showSelectedNumber();
+            
             break;
 
         
-        case "5":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+        case "5": 
+            displayedNumber.push(5);
+            showSelectedNumber();
+            
             break;
         
     
         case "6":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+            displayedNumber.push(6);
+            showSelectedNumber();
+            
             break;
             
         
-        case "7":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+        case "7": 
+            displayedNumber.push(7);
+            showSelectedNumber();
+            
             break;
          
             
         case "8":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+            displayedNumber.push(8);
+            showSelectedNumber();
+            
             break;
             
         
         case "9":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+            displayedNumber.push(9);
+            showSelectedNumber();
+            
             break;
 
         
         case "0":
-            displayedNumber += target.id;
-            resultDisplay.textContent = displayedNumber;
+            displayedNumber.push(0);
+            showSelectedNumber();
+            
             break;
 
         case "comma":
-            displayedNumber = displayedNumber.split('');
-            if (displayedNumber.includes(".")) {
-                displayedNumber = displayedNumber.join('');
-                break};
-            displayedNumber = displayedNumber.join('');
-            displayedNumber += ".";
-            resultDisplay.textContent = displayedNumber;
+            if (displayedNumber.includes(".")) {break};
+            displayedNumber.push(".");
+            showSelectedNumber();
+            
             break;
 
 
         case "division":
             chosenOperator = "/";
-            firstNumber = changeStrIntoNumber(displayedNumber);
-            waitingOperation.textContent = `${firstNumber} ${chosenOperator}`;
             action = divide;
+            showWaitingOperation();
+            
             break;
 
         case "multiplication":
-
+            chosenOperator = "*";
+            action = multiply;
+            showWaitingOperation();
+            
             break;
 
         case "substraction":
-
+            chosenOperator = "-";
+            action = sub;
+            showWaitingOperation();
+            
             break;
 
         case "addition":
-
+            chosenOperator = "+";
+            action = add;
+            showWaitingOperation();
+            
             break;
 
         case "equal":
-            secondNumber = 2;
+            getSecondNumber();
             result = operate(action, firstNumber, secondNumber);
+            waitingOperation.textContent = `${firstNumber} ${chosenOperator} ${secondNumber}`
             resultDisplay.textContent = result;
+            displayedNumber = [0];
+            
             break;
+
+        // click equal devrait actualiser l'opé ,même sans chiffre
         
     }
 });
 
-resultDisplay.textContent = displayedNumber;
+showSelectedNumber();
