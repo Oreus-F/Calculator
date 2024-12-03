@@ -3,6 +3,7 @@ let firstNumber;
 let secondNumber;
 let action;
 let result;
+let chosenOperator;
 
 
 const digitBox = document.querySelector("#digitBox");
@@ -138,7 +139,9 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "division":
+            chosenOperator = "/";
             firstNumber = changeStrIntoNumber(displayedNumber);
+            waitingOperation.textContent = `${firstNumber} ${chosenOperator}`;
             action = divide;
             break;
 
