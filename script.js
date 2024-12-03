@@ -6,6 +6,7 @@ let result;
 
 
 const digitBox = document.querySelector("#digitBox");
+const waitingOperation = document.querySelector("#waitingOperation");
 const resultDisplay = document.querySelector("#resultDisplay");
 
 
