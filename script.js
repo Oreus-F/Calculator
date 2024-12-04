@@ -15,7 +15,8 @@ const getVariable = function(){
         displayedNumber : ${displayedNumber}
         firstNumber : ${firstNumber}
         secondNumber : ${secondNumber}
-        result : ${result}`);
+        result : ${result}
+        action : ${action}`);
 };
 
 
@@ -59,23 +60,17 @@ const clearAll = function(){
 
 const getFirstNumber = function(){
     firstNumber = changeStrIntoNumber(displayedNumber.join(''));
+    displayedNumber = [0];
+
 };
 
 const getSecondNumber = function(){
-    let checkNumber = displayedNumber.join('');
-    console.log(checkNumber);
-    if(checkNumber === "0" && !(result === undefined)){
-        secondNumber = result;
-    } else {
-        secondNumber = changeStrIntoNumber(displayedNumber.join(''));
-    };
+
 };
 
 
 const showWaitingOperation = function(){
-    getFirstNumber();
     waitingOperation.textContent = `${firstNumber} ${chosenOperator}`;
-    displayedNumber = [0];
 };
 
 const showSelectedNumber = function(){
@@ -188,6 +183,7 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "division":
+            getFirstNumber();
             chosenOperator = "/";
             action = divide;
             showWaitingOperation();
@@ -195,6 +191,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "multiplication":
+            getFirstNumber();
             chosenOperator = "*";
             action = multiply;
             showWaitingOperation();
@@ -202,6 +199,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "substraction":
+            getFirstNumber();
             chosenOperator = "-";
             action = sub;
             showWaitingOperation();
@@ -209,6 +207,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "addition":
+            getFirstNumber();
             chosenOperator = "+";
             action = add;
             showWaitingOperation();
@@ -216,11 +215,14 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "equal":
+            // recommencer l'ordre de récupération des variables pour le traitement des données. Commencer simple, complexifier par la suite
+
             getSecondNumber();
             result = operate(action, firstNumber, secondNumber);
-            waitingOperation.textContent = `${firstNumber} ${chosenOperator} ${secondNumber}`
-            resultDisplay.textContent = result;
-            displayedNumber = [0];
+            waitingOperation.textContent = `${firstNumber} ${chosenOperator} ${secondNumber} =`
+            displayedNumber = String(result).split('');
+            showSelectedNumber();
+            getVariable();
             
             break;
 
