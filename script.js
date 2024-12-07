@@ -24,16 +24,16 @@ const add = function(arr){
     return arr.reduce((acc, value) => acc + value);
 };
 
-const sub = function(a, b){
-    return a - b;
+const sub = function(arr){
+    return arr.reduce((acc, value) => acc - value);
 };
 
-const multiply = function(a, b){
-    return a * b;
+const multiply = function(arr){
+    return arr.reduce((acc, value) => acc * value);
 };
 
-const divide = function(a, b){
-    return a / b;
+const divide = function(arr){
+    return arr.reduce((acc, value) => acc / value);
 };
 
 const operate = function(action, arr){
