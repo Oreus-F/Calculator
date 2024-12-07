@@ -1,6 +1,5 @@
 let displayedNumber = [0];
-let firstNumber;
-let secondNumber;
+let values = [];
 let action;
 let result;
 let chosenOperator;
@@ -13,15 +12,16 @@ const resultDisplay = document.querySelector("#resultDisplay");
 const getVariable = function(){
     console.log(`
         displayedNumber : ${displayedNumber}
-        firstNumber : ${firstNumber}
-        secondNumber : ${secondNumber}
+        firstNumber : ${values[0]}
+        secondNumber : ${values[1]}
+        values : ${values}
         result : ${result}
         action : ${action}`);
 };
 
 
-const add = function(a, b){
-    return a + b;
+const add = function(arr){
+    return arr.reduce((acc, value) => acc + value);
 };
 
 const sub = function(a, b){
@@ -36,8 +36,11 @@ const divide = function(a, b){
     return a / b;
 };
 
-const operate = function(action, firstNumber, secondNumber){
-    return action(firstNumber, secondNumber);
+const operate = function(action, arr){
+    if (chosenOperator === undefined) {return arr[0]};
+    result = action(arr);
+    arr[0] = result;
+    return result; 
 };
 
 
@@ -54,24 +57,43 @@ const changeStrIntoNumber = function(str){
 
 const clearAll = function(){
     displayedNumber = [0];
+    firstNumber = undefined;
+    secondNumber = undefined;
+    chosenOperator = undefined;
     showSelectedNumber();
     waitingOperation.textContent = "";
 };
 
-const getFirstNumber = function(){
-    firstNumber = changeStrIntoNumber(displayedNumber.join(''));
-    displayedNumber = [0];
 
-};
-
-const getSecondNumber = function(){
-
+const storeVariable = function(){
+    let number;
+    if(values.length === 0){
+        number = changeStrIntoNumber(displayedNumber.join(''));
+        values.push(number);
+        displayedNumber = [];
+    } else if (values.length === 2) {
+        return;
+    } else if (displayedNumber.length === 0) {
+        values.push(values[0]);
+    } else {
+        number = changeStrIntoNumber(displayedNumber.join(''));
+        values.push(number);
+        displayedNumber = [];
+    }
 };
 
 
 const showWaitingOperation = function(){
-    waitingOperation.textContent = `${firstNumber} ${chosenOperator}`;
+    waitingOperation.textContent = `${values[0]} ${chosenOperator}`;
 };
+
+const showResultOperation = function(){
+    if(chosenOperator === undefined){
+        waitingOperation.textContent = `${values[0]} =`
+    } else {
+        waitingOperation.textContent = `${values[0]} ${chosenOperator} ${values[1]} =`
+    }
+}
 
 const showSelectedNumber = function(){
     resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
@@ -183,7 +205,7 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "division":
-            getFirstNumber();
+            storeVariable();
             chosenOperator = "/";
             action = divide;
             showWaitingOperation();
@@ -191,7 +213,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "multiplication":
-            getFirstNumber();
+            storeVariable();
             chosenOperator = "*";
             action = multiply;
             showWaitingOperation();
@@ -199,7 +221,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "substraction":
-            getFirstNumber();
+            storeVariable();
             chosenOperator = "-";
             action = sub;
             showWaitingOperation();
@@ -207,7 +229,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "addition":
-            getFirstNumber();
+            storeVariable();
             chosenOperator = "+";
             action = add;
             showWaitingOperation();
@@ -216,10 +238,10 @@ digitBox.addEventListener("click", (e) => {
 
         case "equal":
             // recommencer l'ordre de récupération des variables pour le traitement des données. Commencer simple, complexifier par la suite
-
-            getSecondNumber();
-            result = operate(action, firstNumber, secondNumber);
-            waitingOperation.textContent = `${firstNumber} ${chosenOperator} ${secondNumber} =`
+            getVariable();
+            storeVariable();
+            showResultOperation();
+            operate(action, values);
             displayedNumber = String(result).split('');
             showSelectedNumber();
             getVariable();
