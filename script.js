@@ -1,8 +1,9 @@
-let displayedNumber = [0];
+let displayedNumber = [];
 let values = [];
 let action;
 let result;
 let chosenOperator;
+let lastVariableOperand;
 
 
 const digitBox = document.querySelector("#digitBox");
@@ -14,9 +15,11 @@ const getVariable = function(){
         displayedNumber : ${displayedNumber}
         firstNumber : ${values[0]}
         secondNumber : ${values[1]}
+        values.length : ${values.length}
         values : ${values}
         result : ${result}
-        action : ${action}`);
+        chosenOperator : ${chosenOperator}
+        lastVariableOperand : ${lastVariableOperand}`);
 };
 
 
@@ -37,9 +40,11 @@ const divide = function(arr){
 };
 
 const operate = function(action, arr){
-    if (chosenOperator === undefined) {return arr[0]};
+    if (chosenOperator === undefined) {return result = arr[0]};
     result = action(arr);
     arr[0] = result;
+    lastVariableOperand = arr[1];
+    arr.pop();
     return result; 
 };
 
@@ -57,42 +62,36 @@ const changeStrIntoNumber = function(str){
 
 const clearAll = function(){
     displayedNumber = [0];
-    firstNumber = undefined;
-    secondNumber = undefined;
     chosenOperator = undefined;
+    values = [];
     showSelectedNumber();
     waitingOperation.textContent = "";
 };
 
 
 const storeVariable = function(){
-    let number;
-    if(values.length === 0){
-        number = changeStrIntoNumber(displayedNumber.join(''));
-        values.push(number);
-        displayedNumber = [];
-    } else if (values.length === 2) {
-        return;
-    } else if (displayedNumber.length === 0) {
-        values.push(values[0]);
-    } else {
-        number = changeStrIntoNumber(displayedNumber.join(''));
-        values.push(number);
-        displayedNumber = [];
-    }
+    let number = changeStrIntoNumber(displayedNumber.join(''));
+    // IL FAUT REFAIRE LA CA VA PAS DU TOUT HEIN
 };
+
+// NO DIVISION BY 0 STUPID
+// SELECT 
 
 
 const showWaitingOperation = function(){
     waitingOperation.textContent = `${values[0]} ${chosenOperator}`;
 };
 
-const showResultOperation = function(){
+const showDoingOperation = function(){
     if(chosenOperator === undefined){
         waitingOperation.textContent = `${values[0]} =`
     } else {
         waitingOperation.textContent = `${values[0]} ${chosenOperator} ${values[1]} =`
-    }
+    };
+};
+
+const showResult = function(){
+    displayedNumber = String(result).split('');
 }
 
 const showSelectedNumber = function(){
@@ -205,6 +204,7 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "division":
+            lastVariableOperand = undefined;
             storeVariable();
             chosenOperator = "/";
             action = divide;
@@ -213,6 +213,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "multiplication":
+            lastVariableOperand = undefined;
             storeVariable();
             chosenOperator = "*";
             action = multiply;
@@ -221,6 +222,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "substraction":
+            lastVariableOperand = undefined;
             storeVariable();
             chosenOperator = "-";
             action = sub;
@@ -229,6 +231,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "addition":
+            lastVariableOperand = undefined;
             storeVariable();
             chosenOperator = "+";
             action = add;
@@ -240,10 +243,11 @@ digitBox.addEventListener("click", (e) => {
             // recommencer l'ordre de récupération des variables pour le traitement des données. Commencer simple, complexifier par la suite
             getVariable();
             storeVariable();
-            showResultOperation();
+            showDoingOperation();
             operate(action, values);
-            displayedNumber = String(result).split('');
+            showResult();
             showSelectedNumber();
+            displayedNumber = [];
             getVariable();
             
             break;
