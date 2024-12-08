@@ -13,6 +13,7 @@ const resultDisplay = document.querySelector("#resultDisplay");
 const getVariable = function(){
     console.log(`
         displayedNumber : ${displayedNumber}
+        displayedNumberLength : ${displayedNumber.length}
         firstNumber : ${values[0]}
         secondNumber : ${values[1]}
         values.length : ${values.length}
@@ -35,7 +36,13 @@ const multiply = function(arr){
     return arr.reduce((acc, value) => acc * value);
 };
 
+// DIVISER PAR 0 - PROCHAINS DEFI 
 const divide = function(arr){
+    if(arr[1] === 0) {
+        arr.pop();
+        return displayedNumber = "You should pay more attention in class you know.";
+        
+    }
     return arr.reduce((acc, value) => acc / value);
 };
 
@@ -61,21 +68,68 @@ const changeStrIntoNumber = function(str){
 };
 
 const clearAll = function(){
-    displayedNumber = [0];
+    displayedNumber = [];
     chosenOperator = undefined;
     values = [];
     showSelectedNumber();
+    lastVariableOperand = undefined;
+    result = undefined;
     waitingOperation.textContent = "";
 };
 
+const deleteError = function(arr){
+    console.log("fonction delete activé");
+    if (arr.length === 2) {
+        console.log("ERROR 2 VARIABLES");
+        arr.pop();
+        console.log(arr.length);
+        console.log(arr);
+        console.log("fonction réussi");
+    };
+
+};
+
+const operateIfTwo = function(arr){
+    if (arr.length === 2 && arr[0] !== result) {
+        console.log("NE DOIT LE FAIRE QUE SI ON CHANGE D'OPERATEUR  ")
+        operate(action, values);
+        showResult();
+        showSelectedNumber();
+        displayedNumber = [];
+        lastVariableOperand = undefined;
+    };
+};
 
 const storeVariable = function(){
     let number = changeStrIntoNumber(displayedNumber.join(''));
-    // IL FAUT REFAIRE LA CA VA PAS DU TOUT HEIN
+    let numberLength = displayedNumber.join('').length;
+    //
+
+    
+    if (chosenOperator === undefined && values.length === 1) {
+        console.log("Opérateur non choisi du coup, on garde le chiffre affiché");
+        if (numberLength > 0) {values[0] = number};
+    } else if (lastVariableOperand !== undefined && numberLength === 0 && values[0] === result){
+        console.log("Pas de nouvelles valeur, on garde la même opération")
+        values[1] = lastVariableOperand;
+        displayedNumber = [];
+    } else if (values.length === 1 && lastVariableOperand === undefined && numberLength === 0){
+        console.log("Première opération, pas de deuxième valeur, on copie la première")
+        values[1] = values[0];
+        displayedNumber = [];
+    } else if (number !== values[0] && lastVariableOperand !== undefined){
+        console.log("")
+        values[0] = number;
+        values[1] = lastVariableOperand;
+        displayedNumber = [];
+    } else {
+        console.log("On pousse le chiffre zeubi")
+        values.push(number)
+        displayedNumber = [];
+    };
 };
 
 // NO DIVISION BY 0 STUPID
-// SELECT 
 
 
 const showWaitingOperation = function(){
@@ -95,6 +149,7 @@ const showResult = function(){
 }
 
 const showSelectedNumber = function(){
+    if (displayedNumber === NaN){ return resultDisplay.textContent = displayedNumber;}
     resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
 }
 
@@ -204,8 +259,10 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "division":
+            deleteError(values);
             lastVariableOperand = undefined;
             storeVariable();
+            operateIfTwo(values);
             chosenOperator = "/";
             action = divide;
             showWaitingOperation();
@@ -213,17 +270,23 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "multiplication":
+            deleteError(values);
             lastVariableOperand = undefined;
             storeVariable();
+            operateIfTwo(values);
             chosenOperator = "*";
             action = multiply;
             showWaitingOperation();
+            console.log("VARIABLE FINALE")
+            getVariable();
             
             break;
 
         case "substraction":
+            deleteError(values);
             lastVariableOperand = undefined;
             storeVariable();
+            operateIfTwo(values);
             chosenOperator = "-";
             action = sub;
             showWaitingOperation();
@@ -231,8 +294,10 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "addition":
+            deleteError(values);
             lastVariableOperand = undefined;
             storeVariable();
+            operateIfTwo(values);
             chosenOperator = "+";
             action = add;
             showWaitingOperation();
@@ -240,11 +305,12 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "equal":
+            deleteError(values);
             // recommencer l'ordre de récupération des variables pour le traitement des données. Commencer simple, complexifier par la suite
             getVariable();
             storeVariable();
-            showDoingOperation();
             operate(action, values);
+            showDoingOperation();
             showResult();
             showSelectedNumber();
             displayedNumber = [];
