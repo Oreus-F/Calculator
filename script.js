@@ -4,6 +4,7 @@ let action;
 let result;
 let chosenOperator;
 let lastVariableOperand;
+let noDivisionBy0 = "Someone fall asleep during math class ?";
 
 
 const digitBox = document.querySelector("#digitBox");
@@ -38,17 +39,18 @@ const multiply = function(arr){
 
 // DIVISER PAR 0 - PROCHAINS DEFI 
 const divide = function(arr){
-    if(arr[1] === 0) {
-        arr.pop();
-        return displayedNumber = "You should pay more attention in class you know.";
-        
-    }
     return arr.reduce((acc, value) => acc / value);
 };
 
 const operate = function(action, arr){
-    if (chosenOperator === undefined) {return result = arr[0]};
+    if (chosenOperator === undefined) {
+        showDoingOperation();
+        return result = arr[0]};
+    if (action === divide && arr[1] === 0){
+        arr.pop();
+        return result = noDivisionBy0};
     result = action(arr);
+    showDoingOperation();
     arr[0] = result;
     lastVariableOperand = arr[1];
     arr.pop();
@@ -113,6 +115,9 @@ const storeVariable = function(){
         console.log("Pas de nouvelles valeur, on garde la même opération")
         values[1] = lastVariableOperand;
         displayedNumber = [];
+    } else if (result === noDivisionBy0) {
+        clearAll();
+        values[0] = 0;
     } else if (values.length === 1 && lastVariableOperand === undefined && numberLength === 0){
         console.log("Première opération, pas de deuxième valeur, on copie la première")
         values[1] = values[0];
@@ -139,6 +144,8 @@ const showWaitingOperation = function(){
 const showDoingOperation = function(){
     if(chosenOperator === undefined){
         waitingOperation.textContent = `${values[0]} =`
+    } else if (result === noDivisionBy0){
+        waitingOperation.textContent = `${values[0]} ${chosenOperator}`
     } else {
         waitingOperation.textContent = `${values[0]} ${chosenOperator} ${values[1]} =`
     };
@@ -149,7 +156,7 @@ const showResult = function(){
 }
 
 const showSelectedNumber = function(){
-    if (displayedNumber === NaN){ return resultDisplay.textContent = displayedNumber;}
+    if (result === noDivisionBy0){return resultDisplay.textContent = result;}
     resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
 }
 
@@ -168,7 +175,8 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "del":
-
+            displayedNumber.pop();
+            showSelectedNumber();
             /*
             displayedNumber = deleteLastNumber(displayedNumber);
             resultDisplay.textContent = displayedNumber;
@@ -310,7 +318,6 @@ digitBox.addEventListener("click", (e) => {
             getVariable();
             storeVariable();
             operate(action, values);
-            showDoingOperation();
             showResult();
             showSelectedNumber();
             displayedNumber = [];
