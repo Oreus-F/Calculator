@@ -229,7 +229,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "division":
             lastVariableOperand = undefined;
-
+            getFirstVariable();
             chosenOperator = "/";
             action = divide;
             showWaitingOperation();
@@ -238,7 +238,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "multiplication":
             lastVariableOperand = undefined;
-
+            getFirstVariable();
             chosenOperator = "*";
             action = multiply;
             showWaitingOperation();
@@ -247,7 +247,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "substraction":
             lastVariableOperand = undefined;
-
+            getFirstVariable();
             chosenOperator = "-";
             action = sub;
             showWaitingOperation();
@@ -256,7 +256,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "addition":
             lastVariableOperand = undefined;
-
+            getFirstVariable();
             chosenOperator = "+";
             action = add;
             showWaitingOperation();
@@ -265,6 +265,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "equal":
 
+            getSecondVariable();
             operate(action, values);
             showResult();
             showSelectedNumber();
