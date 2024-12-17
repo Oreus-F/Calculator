@@ -84,7 +84,16 @@ const getFirstVariable = function(){
     let numberLength = displayedNumber.join('').length;
     //
 
-    values.push(number)
+    if (values.length === 1 && numberLength > 0) {
+        values.push(number);
+        operate(action, values);
+        showResult();
+        showSelectedNumber();
+        displayedNumber = [];
+    } else { 
+        values.push(number);
+        displayedNumber = [];
+    };
 
 };
 
@@ -93,7 +102,8 @@ const getSecondVariable = function(){
     let numberLength = displayedNumber.join('').length;
     //
 
-    values.push(number)
+    values.push(number);
+    displayedNumber = [];
 
 };
 
