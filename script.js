@@ -84,18 +84,23 @@ const getFirstVariable = function(){
     let numberLength = displayedNumber.join('').length;
     //
 
+
     if (values.length === 1 && numberLength > 0) {
         values.push(number);
         operate(action, values);
         showResult();
         showSelectedNumber();
         displayedNumber = [];
+    }else if (values.length === 1 && numberLength === 0) {
+        getVariable();
+        return;
     } else if (numberLength === 0 && result !== undefined){
         values.push(result);
     } else {
         values.push(number);
         displayedNumber = [];
-    }
+    };
+
 
 };
 
@@ -106,12 +111,14 @@ const getSecondVariable = function(){
 
     if (values.length === 1 && numberLength === 0 && lastVariableOperand !== undefined) {
         values.push(lastVariableOperand);
-    } else if (values.length === 0) {
-        getFirstVariable();
+    } else if (values.length === 0 && result !== undefined) {
+        values[0] = result;
         getSecondVariable();
+    } else if (values.length === 1 && numberLength === 0) {
+        values.push(values[0]);
     } else {
-    values.push(number);
-    displayedNumber = [];
+        values.push(number);
+        displayedNumber = [];
     };
 };
 
@@ -288,6 +295,7 @@ digitBox.addEventListener("click", (e) => {
         case "equal":
 
             getSecondVariable();
+            getVariable();
             operate(action, values);
             showResult();
             showSelectedNumber();
