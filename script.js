@@ -84,7 +84,7 @@ const getFirstVariable = function(){
     let numberLength = displayedNumber.join('').length;
     //
 
-
+    values.push(number)
 
 };
 
@@ -93,7 +93,7 @@ const getSecondVariable = function(){
     let numberLength = displayedNumber.join('').length;
     //
 
-
+    values.push(number)
 
 };
 
