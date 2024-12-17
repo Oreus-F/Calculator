@@ -110,13 +110,23 @@ const getSecondVariable = function(){
     //
 
     if (values.length === 1 && numberLength === 0 && lastVariableOperand !== undefined) {
+        console.log("first one")
         values.push(lastVariableOperand);
+    } else if (values.length === 0 && numberLength > 0 ) {
+        console.log("N°2")
+        getFirstVariable();
+        if (lastVariableOperand !== undefined) {
+            getSecondVariable();
+        };
     } else if (values.length === 0 && result !== undefined) {
+        console.log("N°3")
         values[0] = result;
         getSecondVariable();
-    } else if (values.length === 1 && numberLength === 0) {
+    } else if (values.length === 1 && numberLength === 0 && chosenOperator !== undefined) {
+        console.log("N°4")
         values.push(values[0]);
     } else {
+        console.log("here");
         values.push(number);
         displayedNumber = [];
     };
