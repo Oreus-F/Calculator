@@ -78,23 +78,6 @@ const clearAll = function(){
     waitingOperation.textContent = "";
 };
 
-const deleteError = function(arr){
-    if (arr.length === 2) {arr.pop();};
-};
-
-const operateIfTwo = function(arr){
-    if (arr.length === 2 && arr[0] !== result) {
-        console.log("NE DOIT LE FAIRE QUE SI ON CHANGE D'OPERATEUR  ")
-        operate(action, values);
-        showResult();
-        showSelectedNumber();
-        displayedNumber = [];
-        lastVariableOperand = undefined;
-    };
-};
-
-   
-// que passa mijo, need to recommencer du scratch
 
 const storeVariable = function(){
     let number = changeStrIntoNumber(displayedNumber.join(''));
@@ -238,8 +221,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "division":
             lastVariableOperand = undefined;
-            storeVariable(target.id);
-            operateIfTwo(values);
+
             chosenOperator = "/";
             action = divide;
             showWaitingOperation();
@@ -248,8 +230,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "multiplication":
             lastVariableOperand = undefined;
-            storeVariable(target.id);
-            operateIfTwo(values);
+
             chosenOperator = "*";
             action = multiply;
             showWaitingOperation();
@@ -258,8 +239,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "substraction":
             lastVariableOperand = undefined;
-            storeVariable(target.id);
-            operateIfTwo(values);
+
             chosenOperator = "-";
             action = sub;
             showWaitingOperation();
@@ -268,8 +248,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "addition":
             lastVariableOperand = undefined;
-            storeVariable(target.id);
-            operateIfTwo(values);
+
             chosenOperator = "+";
             action = add;
             showWaitingOperation();
@@ -277,12 +256,11 @@ digitBox.addEventListener("click", (e) => {
             break;
 
         case "equal":
-            storeVariable(target.id);
+
             operate(action, values);
             showResult();
             showSelectedNumber();
             displayedNumber = [];
-            getVariable();
             
             break;
 
