@@ -79,7 +79,7 @@ const clearAll = function(){
 };
 
 
-const storeVariable = function(){
+const getFirstVariable = function(){
     let number = changeStrIntoNumber(displayedNumber.join(''));
     let numberLength = displayedNumber.join('').length;
     //
@@ -88,6 +88,14 @@ const storeVariable = function(){
 
 };
 
+const getSecondVariable = function(){
+    let number = changeStrIntoNumber(displayedNumber.join(''));
+    let numberLength = displayedNumber.join('').length;
+    //
+
+
+
+};
 
 
 const showWaitingOperation = function(){
