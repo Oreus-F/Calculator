@@ -47,7 +47,7 @@ const operate = function(action, arr){
         showDoingOperation();
         return result = arr[0]};
     if (action === divide && arr[1] === 0){
-        arr.pop();
+        values = [];
         return result = noDivisionBy0};
     result = action(arr);
     showDoingOperation();
