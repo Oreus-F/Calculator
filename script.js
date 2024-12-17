@@ -146,6 +146,7 @@ const showResult = function(){
 }
 
 const showSelectedNumber = function(){
+    if (displayedNumber.includes(".", displayedNumber.length - 1)) {return resultDisplay.textContent = displayedNumber.join('')}
     if (result === noDivisionBy0){return resultDisplay.textContent = result;}
     resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
 }
@@ -167,14 +168,6 @@ digitBox.addEventListener("click", (e) => {
         case "del":
             displayedNumber.pop();
             showSelectedNumber();
-            /*
-            displayedNumber = deleteLastNumber(displayedNumber);
-            resultDisplay.textContent = displayedNumber;
-
-            Problem is, if the operation is done, 
-            the del case will get back into the previous number to work
-            so it will be the last thing to do after make sure all operations works
-            */
             
             break;
                     
@@ -250,6 +243,7 @@ digitBox.addEventListener("click", (e) => {
 
         case "comma":
             if (displayedNumber.includes(".")) {break};
+            if (displayedNumber.length === 0) {displayedNumber.push(0)};
             displayedNumber.push(".");
             showSelectedNumber();
             
