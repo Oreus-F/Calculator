@@ -90,10 +90,12 @@ const getFirstVariable = function(){
         showResult();
         showSelectedNumber();
         displayedNumber = [];
-    } else { 
+    } else if (numberLength === 0 && result !== undefined){
+        values.push(result);
+    } else {
         values.push(number);
         displayedNumber = [];
-    };
+    }
 
 };
 
