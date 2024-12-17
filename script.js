@@ -104,9 +104,15 @@ const getSecondVariable = function(){
     let numberLength = displayedNumber.join('').length;
     //
 
+    if (values.length === 1 && numberLength === 0 && lastVariableOperand !== undefined) {
+        values.push(lastVariableOperand);
+    } else if (values.length === 0) {
+        getFirstVariable();
+        getSecondVariable();
+    } else {
     values.push(number);
     displayedNumber = [];
-
+    };
 };
 
 
