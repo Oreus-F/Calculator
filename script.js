@@ -109,7 +109,11 @@ const getSecondVariable = function(){
 
 
 const showWaitingOperation = function(){
-    waitingOperation.textContent = `${values[0]} ${chosenOperator}`;
+    if (values[0] === undefined && result !== undefined) {
+        waitingOperation.textContent = `${result} ${chosenOperator}`;
+    } else { 
+        waitingOperation.textContent = `${values[0]} ${chosenOperator}`;
+    };
 };
 
 const showDoingOperation = function(){
