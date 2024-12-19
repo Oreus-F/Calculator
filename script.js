@@ -173,7 +173,7 @@ digitBox.addEventListener("click", (e) => {
     switch(target.id){
         
 
-        case "clear":
+        case "delete":
             clearAll();
             
             break;
@@ -255,7 +255,7 @@ digitBox.addEventListener("click", (e) => {
             
             break;
 
-        case "comma":
+        case ".":
             if (displayedNumber.includes(".")) {break};
             if (displayedNumber.length === 0) {displayedNumber.push(0)};
             displayedNumber.push(".");
@@ -264,7 +264,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
 
-        case "division":
+        case "/":
             lastVariableOperand = undefined;
             getFirstVariable();
             chosenOperator = "/";
@@ -273,7 +273,7 @@ digitBox.addEventListener("click", (e) => {
             
             break;
 
-        case "multiplication":
+        case "*":
             lastVariableOperand = undefined;
             getFirstVariable();
             chosenOperator = "*";
@@ -282,7 +282,7 @@ digitBox.addEventListener("click", (e) => {
             
             break;
 
-        case "substraction":
+        case "-":
             lastVariableOperand = undefined;
             getFirstVariable();
             chosenOperator = "-";
@@ -291,7 +291,7 @@ digitBox.addEventListener("click", (e) => {
             
             break;
 
-        case "addition":
+        case "+":
             lastVariableOperand = undefined;
             getFirstVariable();
             chosenOperator = "+";
@@ -300,7 +300,7 @@ digitBox.addEventListener("click", (e) => {
             
             break;
 
-        case "equal":
+        case "=":
 
             getSecondVariable();
             getVariable();
@@ -316,13 +316,6 @@ digitBox.addEventListener("click", (e) => {
     }
 });
 
-const regex = /^[0-9]+$/
-
-calculatorBox.addEventListener("keypress", (e) => {
-    if (regex.test(e.key)){
-        console.log(e.key);
-    };
-});
 
 showSelectedNumber();
 
