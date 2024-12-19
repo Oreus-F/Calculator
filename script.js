@@ -5,12 +5,33 @@ let result;
 let chosenOperator;
 let lastVariableOperand;
 let noDivisionBy0 = "Maybe no one told you, but school is free you know.";
+const regex = /^[0-9]+$/
 
 
 const digitBox = document.querySelector("#digitBox");
 const waitingOperation = document.querySelector("#waitingOperation");
 const resultDisplay = document.querySelector("#resultDisplay");
 const calculatorBox = document.querySelector("#calculatorBox");
+const buttons = document.querySelectorAll("button")
+
+
+
+
+document.addEventListener("keypress", (e) => {
+    let key = e.key;
+    if (key === "Enter"){
+        e.preventDefault();
+    };
+    console.log(key)
+    buttons.forEach(button => {
+        if (key === "Enter" && button.id === "="){
+            button.click();
+        } else if(button.id === key) {
+            button.click();
+        };
+    });
+});
+
 
 const getVariable = function(){
     console.log(`
@@ -53,7 +74,6 @@ const operate = function(action, arr){
         return result = noDivisionBy0};
     result = action(arr);
     result = +result.toFixed(3);
-    getVariable();
     showDoingOperation();
     lastVariableOperand = arr[1];
     values = [];
@@ -172,7 +192,7 @@ digitBox.addEventListener("click", (e) => {
     switch(target.id){
         
 
-        case "delete":
+        case "Delete":
             clearAll();
             
             break;
