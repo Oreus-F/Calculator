@@ -27,24 +27,21 @@ const getVariable = function(){
 
 
 const add = function(arr){
-    let sum = arr.reduce((acc, value) => acc + value);
-    return sum.toFixed(3);
+    return arr.reduce((acc, value) => acc + value);
+    
 };
 
 const sub = function(arr){
-    let sum = arr.reduce((acc, value) => acc - value);
-    return sum.toFixed(3);
+    return arr.reduce((acc, value) => acc - value);
 };
 
 const multiply = function(arr){
-    let sum = arr.reduce((acc, value) => acc * value);
-    return sum.toFixed(3);
+    return arr.reduce((acc, value) => acc * value);
 };
 
 
 const divide = function(arr){
-    let sum = arr.reduce((acc, value) => acc / value);
-    return sum.toFixed(3);
+    return arr.reduce((acc, value) => acc / value);
 };
 
 const operate = function(action, arr){
@@ -55,6 +52,8 @@ const operate = function(action, arr){
         values = [];
         return result = noDivisionBy0};
     result = action(arr);
+    result = +result.toFixed(3);
+    getVariable();
     showDoingOperation();
     lastVariableOperand = arr[1];
     values = [];
@@ -315,6 +314,8 @@ digitBox.addEventListener("click", (e) => {
         
     }
 });
+
+
 
 
 showSelectedNumber();
