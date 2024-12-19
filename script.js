@@ -180,7 +180,7 @@ digitBox.addEventListener("click", (e) => {
             break;
 
 
-        case "del":
+        case "Backspace":
             displayedNumber.pop();
             showSelectedNumber();
             
