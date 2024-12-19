@@ -320,12 +320,10 @@ digitBox.addEventListener("click", (e) => {
 
 document.addEventListener("keydown", (e) => {
     let key = e.key;
-    console.log(key);
-    if (key === "Enter"){
-        e.preventDefault();
-    };
+
     buttons.forEach(button => {
         if (key === "Enter" && button.id === "="){
+            e.preventDefault();
             button.click();
         } else if(button.id === key) {
             button.click();
