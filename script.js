@@ -10,6 +10,7 @@ let noDivisionBy0 = "Maybe no one told you, but school is free you know.";
 const digitBox = document.querySelector("#digitBox");
 const waitingOperation = document.querySelector("#waitingOperation");
 const resultDisplay = document.querySelector("#resultDisplay");
+const calculatorBox = document.querySelector("#calculatorBox");
 
 const getVariable = function(){
     console.log(`
@@ -315,4 +316,13 @@ digitBox.addEventListener("click", (e) => {
     }
 });
 
+const regex = /^[0-9]+$/
+
+calculatorBox.addEventListener("keypress", (e) => {
+    if (regex.test(e.key)){
+        console.log(e.key);
+    };
+});
+
 showSelectedNumber();
+
