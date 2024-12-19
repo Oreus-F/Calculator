@@ -166,6 +166,7 @@ const showSelectedNumber = function(){
 }
 
 const changeNumberSign = function (){
+    if (displayedNumber.length === 0){return};
     if (displayedNumber.includes("-")) {
         displayedNumber.shift();
     } else {displayedNumber.unshift("-")};
@@ -182,6 +183,12 @@ digitBox.addEventListener("click", (e) => {
         case "Delete":
             clearAll();
             
+            break;
+
+
+        case "numbPos":
+            changeNumberSign();
+
             break;
 
 
