@@ -318,8 +318,9 @@ digitBox.addEventListener("click", (e) => {
 });
 
 
-document.addEventListener("keypress", (e) => {
+document.addEventListener("keydown", (e) => {
     let key = e.key;
+    console.log(key);
     if (key === "Enter"){
         e.preventDefault();
     };
