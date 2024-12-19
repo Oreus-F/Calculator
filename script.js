@@ -165,7 +165,7 @@ const showSelectedNumber = function(){
     resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
 }
 
-const changeNumbNegativePositive = function (){
+const changeNumberSign = function (){
     if (displayedNumber.includes("-")) {
         displayedNumber.shift();
     } else {displayedNumber.unshift("-")};
