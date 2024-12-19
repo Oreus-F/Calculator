@@ -26,7 +26,8 @@ const getVariable = function(){
 
 
 const add = function(arr){
-    return arr.reduce((acc, value) => acc + value);
+    let sum = arr.reduce((acc, value) => acc + value);
+    return sum.toFixed(3);
 };
 
 const sub = function(arr){
