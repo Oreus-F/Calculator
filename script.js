@@ -31,16 +31,19 @@ const add = function(arr){
 };
 
 const sub = function(arr){
-    return arr.reduce((acc, value) => acc - value);
+    let sum = arr.reduce((acc, value) => acc - value);
+    return sum.toFixed(3);
 };
 
 const multiply = function(arr){
-    return arr.reduce((acc, value) => acc * value);
+    let sum = arr.reduce((acc, value) => acc * value);
+    return sum.toFixed(3);
 };
 
 
 const divide = function(arr){
-    return arr.reduce((acc, value) => acc / value);
+    let sum = arr.reduce((acc, value) => acc / value);
+    return sum.toFixed(3);
 };
 
 const operate = function(action, arr){
