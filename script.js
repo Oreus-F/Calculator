@@ -165,6 +165,12 @@ const showSelectedNumber = function(){
     resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
 }
 
+const changeNumbNegativePositive = function (){
+    if (displayedNumber.includes("-")) {
+        displayedNumber.shift();
+    } else {displayedNumber.unshift("-")};
+    showSelectedNumber();
+};
 
 
 digitBox.addEventListener("click", (e) => {
