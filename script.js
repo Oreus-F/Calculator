@@ -5,7 +5,6 @@ let result;
 let chosenOperator;
 let lastVariableOperand;
 let noDivisionBy0 = "Maybe no one told you, but school is free you know.";
-const regex = /^[0-9]+$/
 
 
 const digitBox = document.querySelector("#digitBox");
@@ -14,23 +13,6 @@ const resultDisplay = document.querySelector("#resultDisplay");
 const calculatorBox = document.querySelector("#calculatorBox");
 const buttons = document.querySelectorAll("button")
 
-
-
-
-document.addEventListener("keypress", (e) => {
-    let key = e.key;
-    if (key === "Enter"){
-        e.preventDefault();
-    };
-    console.log(key)
-    buttons.forEach(button => {
-        if (key === "Enter" && button.id === "="){
-            button.click();
-        } else if(button.id === key) {
-            button.click();
-        };
-    });
-});
 
 
 const getVariable = function(){
@@ -333,6 +315,21 @@ digitBox.addEventListener("click", (e) => {
         // click equal devrait actualiser l'opé ,même sans chiffre
         
     }
+});
+
+
+document.addEventListener("keypress", (e) => {
+    let key = e.key;
+    if (key === "Enter"){
+        e.preventDefault();
+    };
+    buttons.forEach(button => {
+        if (key === "Enter" && button.id === "="){
+            button.click();
+        } else if(button.id === key) {
+            button.click();
+        };
+    });
 });
 
 
