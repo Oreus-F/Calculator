@@ -98,7 +98,6 @@ const getFirstVariable = function(){
         showSelectedNumber();
         displayedNumber = [];
     }else if (values.length === 1 && numberLength === 0) {
-        getVariable();
         return;
     } else if (numberLength === 0 && result !== undefined){
         values.push(result);
@@ -304,7 +303,6 @@ digitBox.addEventListener("click", (e) => {
         case "=":
 
             getSecondVariable();
-            getVariable();
             operate(action, values);
             showResult();
             showSelectedNumber();
