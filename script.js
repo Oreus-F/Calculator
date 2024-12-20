@@ -344,6 +344,6 @@ document.addEventListener("keydown", (e) => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => showSelectedNumber());
 
-showSelectedNumber();
 
