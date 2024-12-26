@@ -97,10 +97,13 @@ const getFirstVariable = function(){
         showResult();
         showSelectedNumber();
         displayedNumber = [];
-    }else if (values.length === 1 && numberLength === 0) {
+    }  else if (values.length === 1 && numberLength === 0) {
         return;
     } else if (numberLength === 0 && result !== undefined){
-        values.push(result);
+        if (result === noDivisionBy0){
+            values[0] = 0;
+        } else { 
+            values.push(result);}
     } else {
         values.push(number);
         displayedNumber = [];
@@ -122,8 +125,14 @@ const getSecondVariable = function(){
             getSecondVariable();
         };
     } else if (values.length === 0 && result !== undefined) {
-        values[0] = result;
-        getSecondVariable();
+        if (result === noDivisionBy0){
+            clearAll();
+            values[0] = 0;
+            getSecondVariable();
+        } else {
+            values[0] = result;
+            getSecondVariable();
+        };
     } else if (values.length === 1 && numberLength === 0 && chosenOperator !== undefined) {
         values.push(values[0]);
     } else if (values.length === 1 && chosenOperator === undefined) {
@@ -161,9 +170,15 @@ const showResult = function(){
 
 const showSelectedNumber = function(){
     if (displayedNumber.includes(".", displayedNumber.length - 1)) {return resultDisplay.textContent = displayedNumber.join('')}
-    if (result === noDivisionBy0){return resultDisplay.textContent = result;}
+    if (result === noDivisionBy0){
+        if (displayedNumber.length > 0) {
+            return resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
+        } else { 
+            return resultDisplay.textContent = result;
+        };
+    };
     resultDisplay.textContent = changeStrIntoNumber(displayedNumber.join(''));
-}
+};
 
 const changeNumberSign = function (){
     if (displayedNumber.length === 0){return};
