@@ -1,6 +1,27 @@
+body{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+}
+
+.header, .footer{
+    flex: 1;
+    max-height: 50px;
+}
+
+#calculatorBox{
+    width: 400px;
+    border: 1px solid black;
+    margin: auto;
+    margin-bottom: auto;
+}
+
 #digitBox{
     display: flex;
-    border: 1px black solid;
     flex-direction: column;
     height: 250px;
 }
@@ -9,6 +30,10 @@
     display: flex;
     flex: 1;
     justify-content: space-around;
+}
+
+.numbers.zero{
+    flex-grow: 2.14;
 }
 
 .flexPanel{
@@ -25,20 +50,17 @@
 
 #resultDisplay{
     height: 50px;
-    border: 1px black solid;
-    border-top: none;
+    border-bottom: 1px black solid;
     padding: 5px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    
+    margin-bottom: 8px;
 }
 
 
 #waitingOperation{
     height: 20px;
-    border: 1px black solid;
-    border-bottom: none;
     font-size: 10px;
     padding: 5px;
     display: flex;
@@ -46,6 +68,4 @@
     align-items: center;
 }
 
-#calculatorBox{
-    width: 400px;
-}
+
