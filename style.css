@@ -73,6 +73,7 @@ body{
     border: 1px rgba(0, 0, 0, 0.247) solid;
     margin-bottom: 8px;
     box-shadow: 0mm 0.1mm 1px rgba(0, 0, 0, 0.445);
+    border-radius: 8px;
 }
 
 #resultDisplay{
