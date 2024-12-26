@@ -2,18 +2,20 @@
     display: flex;
     border: 1px black solid;
     flex-direction: column;
+    height: 250px;
 }
 
 .row{
     display: flex;
     flex: 1;
-    border: 1px black solid;
     justify-content: space-around;
 }
 
 .flexPanel{
-    border: 1px black solid;
     flex: 1;
+    padding: 2px;
+    margin: 2px;
+    
 }
 
 .empty{
@@ -22,19 +24,28 @@
 }
 
 #resultDisplay{
-    height: 30px;
+    height: 50px;
     border: 1px black solid;
     border-top: none;
-    text-align: end;
     padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
 }
 
 
 #waitingOperation{
-    height: 15px;
+    height: 20px;
     border: 1px black solid;
     border-bottom: none;
-    text-align: end;
     font-size: 10px;
     padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#calculatorBox{
+    width: 400px;
 }
