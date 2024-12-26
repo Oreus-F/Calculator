@@ -4,7 +4,7 @@ let action;
 let result;
 let chosenOperator;
 let lastVariableOperand;
-let noDivisionBy0 = "Maybe no one told you, but school is free you know.";
+let noDivisionBy0 = "I don't think so.";
 
 
 const digitBox = document.querySelector("#digitBox");
