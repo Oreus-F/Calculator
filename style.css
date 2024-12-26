@@ -56,8 +56,17 @@ body{
 }
 
 .flexPanel.equal{
-    background-color: #3a62b9;
+    background-color: #3a62b9c7;
     color: white;
+}
+
+.flexPanel.equal:hover{
+    background-color: #3a62b97c;
+}
+
+.flexPanel.flexPanel.equal:active{
+    box-shadow: 0mm 0.1mm 1px rgba(0, 0, 0, 0.158); 
+    color: rgba(190, 190, 190, 0.445);  
 }
 
 .display{
