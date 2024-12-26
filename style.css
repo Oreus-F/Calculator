@@ -60,16 +60,19 @@ body{
     color: white;
 }
 
+.display{
+    border: 1px rgba(0, 0, 0, 0.247) solid;
+    margin-bottom: 8px;
+    box-shadow: 0mm 0.1mm 1px rgba(0, 0, 0, 0.445);
+}
+
 #resultDisplay{
     height: 50px;
-    border: 1px rgba(0, 0, 0, 0.247) solid;
-    border-top: none;
     padding: 5px;
     padding-right: 12px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: 8px;
     font-size: 20px;
     
 }
@@ -83,8 +86,6 @@ body{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    border: 1px rgba(0, 0, 0, 0.26) solid;
-    border-bottom: none;
 }
 
 
