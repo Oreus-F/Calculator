@@ -208,8 +208,12 @@ digitBox.addEventListener("click", (e) => {
 
 
         case "Backspace":
-            displayedNumber.pop();
-            showSelectedNumber();
+            if (displayedNumber.length === 0){
+                waitingOperation.textContent = "";
+            } else {
+                displayedNumber.pop();
+                showSelectedNumber();
+            }
             
             break;
                     
